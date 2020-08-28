@@ -1,0 +1,30 @@
+
+#springboot\u6587\u4EF6\u4E0A\u4F20\u603B\u6700\u5927\u503C\u548C\u5355\u6587\u4EF6\u6700\u5927\u503C
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:/usr/local/tomcat/upload/,file:E://imageTemp/upload/
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    check-template-location: true
+    encoding: UTF-8
+    mode: HTML5
+    cache: false
+
+#\u56FE\u7247\u8DEF\u5F84
+Image:
+  IMAGE_UPLOAD_PATH: E://imageTemp/upload/
+  IMAGE_URL_PATH: http://127.0.0.1:8080/img/
+  IMAGE_URL_PATH2: http://127.0.0.1:8080/caifu/
+
+  IMAGE_UPLOAD_PATH_LINUX: /usr/local/tomcat/upload/
+  IMAGE_URL_PATH_LINUX: http://192.168.1.55:8080/img/
+
+server:
+  servlet:
+    context-path: /caifu

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+</head>
+<body>
+<input type="file" name="file" id="file">
+<div id="image">
+    <span><img src=""></span>
+</div>
+<br>
+<script src="../js/jquery-2.1.3.min.js"></script>
+<script src="../layer/layer.js"></script>
+<script>
+    $(function () {
+        $("#file").on("change", function () {
+            uploadImage(this);
+        })
+    });
+
+    function uploadImage(obj) {
+        var file = $("#file").val();
+        if (!file.match(/.jpg|.gif|.png|.jpeg|.bmp/i)) {　　//判断上传文件格式
+            layer.open({
+                content: '上传的图片格式不正确，请重新选择'
+                , skin: 'msg'
+                //,time: 2 //2秒后自动关闭
+            });
+            return;
+        }
+        var fileObj = obj.files[0];
+        var data = new FormData();
+        data.append("file", fileObj);
+        $.ajax({
+            url: "../upload/uploadImage",
+            type: "post",
+            data: data, //JSON.stringify({"file": file}),
+            dataType: "json",
+            // contentType: "application/json",
+            async: false,
+            processData: false,   //用FormData传fd时需有这两项     必要
+            contentType: false,
+            success: function (data) {
+                $("#image span img").attr("src", data.imageUrl);
+            }
+        });
+    }
+</script>
+</body>
+</html>
